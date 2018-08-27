@@ -258,12 +258,28 @@ public class Net {
         return ne;
     }
 
+    public int bestAnswer(){
+        int best = 0;
+        for(int i = 0;i<nodeCount[layers-1];i++){
+            if(nodes[layers-1][i] > nodes[layers-1][best]){
+                best = i;
+            }
+        }
+        return best;
+    }
+
     public String resultsToString(){
+        double most = -999;
+        int mostIndex = 0;
         String str = "";
         for(int i = 0;i<nodeCount[layers-1];i++){
+            if(nodes[layers-1][i] > most){
+                mostIndex = i;
+                most = nodes[layers-1][i];
+            }
             str+=i +":" + toString(nodes[layers-1][i]) + "\n";
          }
-        return str;
+        return str + "best answer:" + mostIndex + "    :" + most + "\n";
     }
 
     public static String toString(double value){

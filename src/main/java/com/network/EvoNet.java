@@ -34,7 +34,6 @@ public class EvoNet {
 //            System.out.println(i + ":" + score[i]);
 //        }
     }
-
     public static double[] runMuliSineTest(){
         double[] score = new double[30];
         for(int i = 1;i<19;i++){
@@ -48,6 +47,8 @@ public class EvoNet {
         runIters(1000,nets);
         return nets.get(0).getScore(data);
     }
+
+
     private static void runIters(int iter, List<Net> nets){
         System.out.println("running " + iter + " iterations");
         int startTimeSec = (int) (System.currentTimeMillis() / 1000);
@@ -138,7 +139,6 @@ public class EvoNet {
         for(int lowerI = half;lowerI<nets.size();lowerI++){
             int higherI = (int)(Math.random()*half);
 //            System.out.println("debug:-------------------higherI:" + higherI);
-
             nets.set(lowerI,nets.get(higherI).similar());
             nets.set(higherI,nets.get(higherI).similar());
         }
@@ -163,6 +163,7 @@ public class EvoNet {
     }
 
     private static void print(List<Net> nets){
+        sort(nets);
         System.out.println("------------------");
         for(int i = 0;i<nets.size();i++){
             System.out.println(toString(i,2) +":" + Net.toString(nets.get(i).getScore(data)));
